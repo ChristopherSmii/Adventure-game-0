@@ -39,7 +39,7 @@
           <h6 id="likes" class="pt-3"></h6>
           <!-- Inventory -->
           <h2 style="text-align: center;" class="p-2">inventory</h2>
-          <div id="backpack">
+          <div class="backpack">
             <div class="bs" id="cs0"></div>
             <div class="bs" id="cs1"></div>
             <div class="bs" id="cs2"></div>
@@ -54,17 +54,23 @@
             <div class="bs" id="cs11"></div>
             
           </div>
+          <div class="container">
+            <!-- Buttons -->
+            <button id="useItem" class="semi-visible btn btn-dark col-12 m-1">use item</button>
+            <button id="deleteItem" class="semi-visible btn btn-dark col-12 m-1">delete item</button>
+            <button id="moveItem" class="semi-visible btn btn-dark col-12 m-1">move item</button>
+          </div>
         </div>
       </div>
     </div>
     <!-- Main game -->
-    <div class="container mt-5">
+    <div class="container mt-5 mb-3">
       <div class="row">
         <div class="col-4 border">
           <div id="health">health</div>
           <div id="hunger">hunger</div>
           <div id="thirst">thirst</div>
-          <h4 style="text-align: center;">condition</h4>
+          <h5 style="text-align: center;">condition</h4>
           <p style="text-align: center;" id="characterCondition">Empty</p>
 
         </div>
@@ -74,20 +80,52 @@
 
             <p class="" id="storyTeller"></p>
           </div>
+        </div>
+      </div>
+      <!-- shelter inventory -->
+      <div class="container" id="shelterInventory">
+        <h2>shelter</h2>
+        <divs class="backpack">
+          <div class="ss" id="ss0"></div>
+          <div class="ss" id="ss1"></div>
+          <div class="ss" id="ss2"></div>
+          <div class="ss" id="ss3"></div>
+          <div class="ss" id="ss4"></div>
+          <div class="ss" id="ss5"></div>
+          <div class="ss" id="ss6"></div>
+          <div class="ss" id="ss7"></div>
+          <div class="ss" id="ss8"></div>
+          <div class="ss" id="ss9"></div>
+          <div class="ss" id="ss10"></div>
+          <div class="ss" id="ss11"></div>
+          <div class="ss" id="ss12"></div>
+          <div class="ss" id="ss13"></div>
+          <div class="ss" id="ss14"></div>
+          <div class="ss" id="ss15"></div>
+          <div class="ss" id="ss16"></div>
+          <div class="ss" id="ss17"></div>
+          <div class="ss" id="ss18"></div>
+          <div class="ss" id="ss19"></div>
+          <div class="ss" id="ss20"></div>
+          <div class="ss" id="ss21"></div>
+          <div class="ss" id="ss22"></div>
+          <div class="ss" id="ss23"></div>
+        </divs>
+      </div>
+      <!-- Continue Button -->
           <div class="container">
-            <div class="row">
-            <button id="use" class="btn btn-dark">use item</button>
-            <button id="use" class="btn btn-dark mt-1">continue</button>
-            </div>
+            <div class="row mt-1">
+              <button id="continue" class="btn btn-dark col-12 m-1">continue</button>
           </div>
         </div>
       </div>
-    </div>
+      
     <script
       src="https://code.jquery.com/jquery-3.7.1.js"
       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
       crossorigin="anonymous"
     ></script>
+    <script src="../JS/text.js"></script>
     <script src="../JS/script.js"></script>
   </body>
 </html>

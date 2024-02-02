@@ -1,6 +1,9 @@
 .visible {
   opacity: 0;
 }
+.semi-visible {
+  opacity: 0.5;
+}
 #killStorage {
   /* restart */
   background-color: red;
@@ -20,7 +23,7 @@
   display: flex;
   justify-content: space-around;
 }
-#backpack {
+.backpack {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -35,4 +38,13 @@
   border: 2px solid black;
   height: 2rem;
   padding-left: 2px;
+  transition: 0.3;
+}
+.bs:hover {
+  opacity: 0.6;
+  background-color: aliceblue;
+}
+.ss:hover {
+  opacity: 0.6;
+  background-color: aliceblue;
 }

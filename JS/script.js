@@ -1,204 +1,3 @@
-const britishLastNames = [
-  "Smith",
-  "Jones",
-  "Taylor",
-  "Brown",
-  "Williams",
-  "Wilson",
-  "Evans",
-  "Johnson",
-  "Roberts",
-  "Walker",
-];
-const britishMaleFirstNames = [
-  "James",
-  "William",
-  "John",
-  "George",
-  "Thomas",
-  "Charles",
-  "Robert",
-  "Edward",
-  "Henry",
-  "Arthur",
-];
-const britishFemaleFirstNames = [
-  "Emma",
-  "Olivia",
-  "Sophia",
-  "Amelia",
-  "Isabella",
-  "Ava",
-  "Mia",
-  "Grace",
-  "Ella",
-  "Charlotte",
-];
-const startFemaleCharacterBackstories = [
-  ", an aspiring artist, seeks inspiration in the hidden corners of the city.",
-  ", a detective with a mysterious past, unravels dark secrets in her pursuit of justice.",
-  ", an adventurous archaeologist, travels the globe in search of ancient artifacts.",
-  ", a talented musician, strives to make her mark on the vibrant music scene.",
-  ", a tech genius, battles corporate intrigue while revolutionizing the tech industry.",
-  ", a passionate environmentalist, fights to protect wildlife and preserve nature.",
-  ", a skilled pilot, races against time in high-stakes missions to save lives.",
-  ", a charismatic journalist, digs into scandals and uncovers the truth behind the headlines.",
-  ", a time-travel researcher, navigates through different eras to solve a family mystery.",
-  ", a resilient survivor, rebuilds her life after overcoming a challenging past.",
-];
-const startMaleCharacterBackstories = [
-  ", a former military operative haunted by his past, seeks redemption through acts of heroism.",
-  ", a brilliant inventor, races against time to prevent his groundbreaking technology from falling into the wrong hands.",
-  ", a detective with a keen mind, navigates the gritty streets of the city to solve complex cases and bring criminals to justice.",
-  ", a seasoned explorer, embarks on a perilous journey to uncover ancient mysteries hidden in uncharted lands.",
-  ", a skilled chef, dreams of opening his own restaurant and showcasing his unique fusion of flavors to the world.",
-  ", a reclusive artist, finds solace in his creations but is compelled to share his masterpieces with the world despite his reservations.",
-  ", a charismatic and ambitious politician, faces moral dilemmas as he strives to bring positive change to a corrupt system.",
-  ", a haunted paranormal investigator, confronts supernatural forces while wrestling with his own inner demons.",
-  ", a dedicated scientist, makes groundbreaking discoveries that have the potential to reshape the future of medicine.",
-  ", a skilled swordsman, roams the land righting wrongs and protecting the innocent in a world filled with danger.",
-];
-const possibleMoods = ["Happy", "Normal", "Sad", "Depressed"];
-const survivalItemsWithWeight = [
-  ["Bottled water", 1.5],
-  ["First aid kit", 0.8],
-  ["Multi-tool", 0.3],
-  ["Flashlight with extra batteries", 0.5],
-  ["Emergency shelter (tent or space blanket)", 1.0],
-  ["Firestarter (matches, lighter)", 0.1],
-  ["Map and compass", 0.2],
-  ["Personal hygiene items (toothbrush, soap)", 0.3],
-  ["Emergency whistle", 0.05],
-  ["Medications (pain relievers, allergy medicine)", 0.2],
-  ["Portable water purification tablets", 0.1],
-  ["Sleeping bag", 1.2],
-  ["Signal mirror", 0.1],
-  ["Multi-vitamins", 0.1],
-];
-const craftingParts = [
-  "Scrap Metal",
-  "Wooden Planks",
-  "Multi-tool",
-  "Nails",
-  "Duct Tape",
-  "Bolts",
-  "Leather Strips",
-  "Glass Shards",
-  "Copper Wire",
-  "Thread",
-  "Rivets",
-];
-const entertainmentItemsWithWeight = [
-  ["Chess", "board game", 2],
-  ["Acoustic guitar", "musical instrument", 5],
-  ["Jenga", "board game", 0.8],
-  ["Harmonica", "musical instrument", 0.5],
-  ["Scrabble", "board game", 0.5],
-  ["Ukulele", "musical instrument", 1],
-  ["Catan", "board game", 0.5],
-];
-const survivalFoodsWithEnergy = [
-  ["Canned Beans", 15],
-  ["Dried Fruit Mix", 12],
-  ["Energy Bars", 18],
-  ["Wild Berries", 9],
-  ["Dehydrated Vegetables", 10],
-  ["Jerky (Beef)", 20],
-  ["Canned Soup", 16],
-  ["Nuts and Seeds", 13],
-  ["Pemmican", 22],
-  ["Granola with Honey", 19],
-  ["Trail Mix", 17],
-  ["MRE (Meal Ready-to-Eat)", 25],
-  ["Instant Oatmeal", 16],
-  ["Crackers", 11],
-  ["Powdered Milk", 12],
-  ["Canned Tuna", 17],
-  ["Chocolate Bars", 20],
-  ["Rice and Beans", 21],
-  ["Hardtack", 10],
-  ["Peanut Butter", 18],
-  ["Lentils", 14],
-  ["Quinoa", 20],
-  ["Canned Vegetables", 13],
-  ["Protein Powder", 25],
-  ["Instant Ramen", 19],
-  ["Honey", 16],
-  ["Canned Fruit", 14],
-  ["Freeze-Dried Ice Cream", 18],
-  ["Dried Fish", 22],
-  ["Soylent Green", 30],
-];
-const meleeWeaponsWithWeight = [
-  ["Combat knife", 0.5],
-  ["Baseball bat", 1.0],
-  ["Machete", 1.2],
-  ["Crowbar", 1.5],
-  ["Brass knuckles", 0.3],
-  ["Tactical tomahawk", 1.8],
-];
-const rangedWeaponsWithWeight = [
-  ["Pistol", 1.2],
-  ["Shotgun", 3.0],
-  ["Assault rifle", 4.5],
-  ["Crossbow", 2.5],
-  ["Sniper rifle", 5.0],
-  ["Submachine gun", 3.8],
-];
-const ammoForRangedWeaponsWithWeight = [
-  ["9mm ammunition", 0.02],
-  ["12-gauge shotgun shells", 0.05],
-  ["5.56mm rifle cartridges", 0.03],
-  ["Bolts for crossbow", 0.02],
-  [".308 rifle bullets", 0.04],
-  [".45 ACP ammunition", 0.02],
-];
-const postWarAloneMaleCharacterBackstories = [
-  ", once a military operative, roams the desolate landscapes alone, haunted by memories of the war, seeking solace in isolation.",
-  ", the brilliant inventor, scavenges alone for resources, driven by a relentless determination to rebuild technology and find purpose in the solitude.",
-  ", the detective, wanders the ruins alone, driven by a personal quest for answers, grappling with the loneliness that echoes through the empty streets.",
-  ", the seasoned explorer, becomes a lone wanderer, navigating the remnants of lost territories, finding solitude in the vast, silent expanses.",
-  ", the skilled chef, adapts his culinary talents to create solitary meals from scarce resources, finding comfort in the routine of survival.",
-  ", the reclusive artist, creates art in isolation, turning remnants of the past into personal symbols of resilience, finding solace in his creations.",
-  ", the ambitious politician, faces the challenges of rebuilding society alone, striving to create order in a world that seems eerily empty.",
-  ", the haunted paranormal investigator, confronts supernatural threats alone, seeking to understand and contain them, isolated from the safety of others.",
-  ", the dedicated scientist, works alone to harness his knowledge in medicine and technology, providing solitary aid to those affected by the war's aftermath... If there are any.",
-  ", the skilled swordsman, becomes a lone guardian, defending against threats, finding purpose in the solitary battle for survival.",
-];
-const postWarAloneFemaleCharacterBackstories = [
-  ", the aspiring artist, wanders the desolate landscapes alone, sketching the remnants of a world that once thrived.",
-  ", the detective with a mysterious past, navigates the ruins alone, driven by an unrelenting pursuit of justice in the silent aftermath.",
-  ", the adventurous archaeologist, explores the deserted landscapes alone, unearthing remnants of lost civilizations in solitude.",
-  ", the talented musician, wanders the empty streets alone, finding solace in the echoes of her melodies in the quiet ruins.",
-  ", the tech genius, adapts her skills to survive alone, hacking into remnants of technology to navigate the post-apocalyptic world.",
-  ", the passionate environmentalist, roams the desolate landscapes alone, fighting to protect the remnants of nature from further decay.",
-  ", the skilled pilot, flies the empty skies alone, seeking signs of life in the vast, silent expanses left by the war.",
-  ", the charismatic journalist, documents the remnants of the world alone, recording the silent stories left behind by a vanished civilization.",
-  ", the time-travel researcher, navigates through different eras alone, seeking answers in the remnants of the past and future.",
-  ", the resilient survivor, rebuilds her life alone, finding strength in solitude after overcoming the challenges of a shattered world.",
-];
-const wildlifeEnemiesDetails = {
-  "Mutated Wolve": { health: 80, strength: 60, speed: 40 },
-  "Radioactive Snake": { health: 50, strength: 40, speed: 70 },
-  "Giant Insect": { health: 60, strength: 50, speed: 60 },
-  "Venomous Spider": { health: 40, strength: 30, speed: 80 },
-  "Feral Boar": { health: 90, strength: 70, speed: 30 },
-  "Marauding Coyote": { health: 70, strength: 60, speed: 50 },
-  "Rabid Bird of Prey": { health: 55, strength: 45, speed: 65 },
-  "Toxic Frog": { health: 30, strength: 20, speed: 90 },
-};
-const sicknessTraitsWithDanger = [
-  { sickness: "Fever", danger: 3 },
-  { sickness: "Food Poisoning", danger: 2 },
-  { sickness: "Dehydration", danger: 4 },
-  { sickness: "Respiratory Infection", danger: 5 },
-  { sickness: "Exhaustion", danger: 2 },
-  { sickness: "Gastroenteritis", danger: 3 },
-  { sickness: "Radiation Sickness", danger: 6 },
-  { sickness: "Heat Stroke", danger: 4 },
-  { sickness: "Hypothermia", danger: 4 },
-  { sickness: "Parasitic Infection", danger: 5 },
-];
 const empty = "Empty";
 console.log(postWarAloneMaleCharacterBackstories);
 
@@ -251,9 +50,9 @@ if (!localStorage.mainCharacterName) {
   //   Character and shelter inventory
 
   localStorage.character00 = meleeWeaponsWithWeight[randd(6)][0];
-  localStorage.character01 = empty;
-  localStorage.character02 = empty;
-  localStorage.character03 = empty;
+  localStorage.character01 = survivalFoodsWithEnergy[randd(31)][0];
+  localStorage.character02 = survivalFoodsWithEnergy[randd(31)][0];
+  localStorage.character03 = survivalItemsWithWeight[randd(13)][0];
   localStorage.character04 = empty;
   localStorage.character05 = empty;
   localStorage.character06 = empty;
@@ -261,7 +60,7 @@ if (!localStorage.mainCharacterName) {
   localStorage.character08 = empty;
   localStorage.character09 = empty;
   localStorage.character10 = empty;
-  localStorage.character11 = empty;
+  localStorage.character11 = survivalFoodsWithEnergy[30];
 
   //shelter
 
@@ -293,7 +92,15 @@ if (!localStorage.mainCharacterName) {
   localStorage.health = "100";
   localStorage.hunger = "100";
   localStorage.thirst = "100";
+
+  //story
+  localStorage.fullStory = 0;
+
+  //day
+  localStorage.day = 0;
 }
+let helpingValueShelter = 0;
+$("#shelterInventory").hide();
 // Creating the enviroment
 $("#mainCharacterName").text(
   localStorage.mainCharacterName + " " + localStorage.mainCharacterLastName
@@ -323,24 +130,56 @@ let characterInventorySet = () => {
   document.querySelectorAll(".bs")[9].innerHTML = localStorage.character09;
   document.querySelectorAll(".bs")[10].innerHTML = localStorage.character10;
   document.querySelectorAll(".bs")[11].innerHTML = localStorage.character11;
+  document.querySelectorAll(".ss")[0].innerHTML = localStorage.shelter00;
+  document.querySelectorAll(".ss")[1].innerHTML = localStorage.shelter01;
+  document.querySelectorAll(".ss")[2].innerHTML = localStorage.shelter02;
+  document.querySelectorAll(".ss")[3].innerHTML = localStorage.shelter03;
+  document.querySelectorAll(".ss")[4].innerHTML = localStorage.shelter04;
+  document.querySelectorAll(".ss")[5].innerHTML = localStorage.shelter05;
+  document.querySelectorAll(".ss")[6].innerHTML = localStorage.shelter06;
+  document.querySelectorAll(".ss")[7].innerHTML = localStorage.shelter07;
+  document.querySelectorAll(".ss")[8].innerHTML = localStorage.shelter08;
+  document.querySelectorAll(".ss")[9].innerHTML = localStorage.shelter09;
+  document.querySelectorAll(".ss")[10].innerHTML = localStorage.shelter10;
+  document.querySelectorAll(".ss")[11].innerHTML = localStorage.shelter11;
+  document.querySelectorAll(".ss")[12].innerHTML = localStorage.shelter12;
+  document.querySelectorAll(".ss")[13].innerHTML = localStorage.shelter13;
+  document.querySelectorAll(".ss")[14].innerHTML = localStorage.shelter14;
+  document.querySelectorAll(".ss")[15].innerHTML = localStorage.shelter15;
+  document.querySelectorAll(".ss")[16].innerHTML = localStorage.shelter16;
+  document.querySelectorAll(".ss")[17].innerHTML = localStorage.shelter17;
+  document.querySelectorAll(".ss")[18].innerHTML = localStorage.shelter18;
+  document.querySelectorAll(".ss")[19].innerHTML = localStorage.shelter19;
+  document.querySelectorAll(".ss")[20].innerHTML = localStorage.shelter20;
+  document.querySelectorAll(".ss")[21].innerHTML = localStorage.shelter21;
+  document.querySelectorAll(".ss")[22].innerHTML = localStorage.shelter22;
+  document.querySelectorAll(".ss")[23].innerHTML = localStorage.shelter23;
 };
 characterInventorySet();
 // this one restarts the game
 let characterStatsDisplay = () => {
   $("#health").text("health: " + localStorage.health + "%");
-  $("#hunger").text("health: " + localStorage.hunger + "%");
-  $("#thirst").text("health: " + localStorage.thirst + "%");
+  $("#hunger").text("hunger: " + localStorage.hunger + "%");
+  $("#thirst").text("thirst: " + localStorage.thirst + "%");
 };
 characterStatsDisplay();
-
+//
+//
+//story display
+//
+//
+//
 let storyDisplay = (storyString) => {
   $("#storyTeller").text(storyString);
 };
 storyDisplay(localStorage.mainCharacterAfterWar);
+//
+//restart
 const restartt = () => {
   localStorage.removeItem("mainCharacterName");
   location.reload();
 };
+//conditionAdd
 let conditionAddremove = (conditionItem) => {
   if (
     conditionItem == document.querySelector("#characterCondition").innerHTML
@@ -351,3 +190,154 @@ let conditionAddremove = (conditionItem) => {
   }
 };
 conditionAddremove(empty);
+//
+//
+//
+
+const day1Text = "After a long time around the streats you found a shelter. ";
+// Main game
+//
+//event of the day
+let chance = () => {
+  let eventOfTheDay;
+  //something found
+  if (randd(100) > 50) {
+    eventOfTheDay = "In search of items.. " + somethingFoundTexts[randd(3)];
+    looting(1 + randd(4));
+  } else {
+    //nothing found
+    eventOfTheDay = "In search of items.. " + nothingFoundTexts[randd(3)];
+    if (randd(100) > 97) {
+      eventOfTheDay = eventOfTheDay + " " + notFeelingWellTexts[randd(3)];
+      $("#characterCondition").text(
+        sicknessTraitsWithDanger[randd(8)].sickness
+      );
+    }
+  }
+  return eventOfTheDay;
+};
+//
+//random Item
+//
+//
+//
+function randomItemGive() {
+  let item = "T";
+
+  if (randd(100) < 60) {
+    item = survivalFoodsWithEnergy[randd(31)][0];
+  } else if (randd(100) < 60) {
+    item = survivalItemsWithWeight[randd(13)][0];
+  } else if (randd(100) < 60) {
+    item = craftingParts[randd(11)][0];
+  } else {
+    item = entertainmentItemsWithWeight[randd(7)][0];
+  }
+  return item;
+}
+//
+//looting function
+//
+let looting = (rNumb) => {
+  let randomItemValue;
+  for (let i = 0; i < rNumb; i++) {
+    randomItemValue = true;
+    if (randomItemValue) {
+    }
+    for (let j = 0; j < 12; j++) {
+      if (
+        document.querySelectorAll(".bs")[j].innerHTML === empty &&
+        randomItemValue === true
+      ) {
+        randomItemValue = false;
+        switch (j) {
+          case 0:
+            localStorage.character00 = randomItemGive();
+            break;
+          case 1:
+            localStorage.character01 = randomItemGive();
+            break;
+          case 2:
+            localStorage.character02 = randomItemGive();
+            break;
+          case 3:
+            localStorage.character03 = randomItemGive();
+            break;
+          case 4:
+            localStorage.character04 = randomItemGive();
+            break;
+          case 5:
+            localStorage.character05 = randomItemGive();
+            break;
+          case 6:
+            localStorage.character06 = randomItemGive();
+            break;
+          case 7:
+            localStorage.character07 = randomItemGive();
+            break;
+          case 8:
+            localStorage.character08 = randomItemGive();
+            break;
+          case 9:
+            localStorage.character09 = randomItemGive();
+            break;
+          case 10:
+            localStorage.character10 = randomItemGive();
+            break;
+          case 11:
+            localStorage.character11 = randomItemGive();
+            break;
+          default:
+            break;
+        }
+        characterInventorySet();
+      }
+    }
+  }
+};
+//
+let damage = 0;
+let sick;
+//
+//continue button (the main part of the game xD)
+$("#continue").on("click", function () {
+  //
+  if (helpingValueShelter == 0) {
+    $("#shelterInventory").show();
+    $("#continue").text("Next Day");
+    $("#storyTeller").text(day1Text + restTexts[randd(2)]);
+    let storyOfTheDay;
+    localStorage.fullStory = day1Text + restTexts[randd(2)];
+    helpingValueShelter = localStorage.day * 1;
+  } else {
+    storyOfTheDay = " " + "Day " + (helpingValueShelter + 1) + ": " + chance();
+    localStorage.fullStory = localStorage.fullStory + storyOfTheDay;
+    storyDisplay(storyOfTheDay);
+    if (document.querySelector("#characterCondition").innerHTML != empty) {
+      for (let i = 0; i < 10; i++) {
+        if (
+          sicknessTraitsWithDanger[i].sickness ==
+          document.querySelector("#characterCondition").innerHTML
+        ) {
+          sick = i;
+        }
+      }
+      damage = sicknessTraitsWithDanger[sick].danger;
+      localStorage.health = localStorage.health - damage;
+    }
+
+    //stats
+    //
+    //
+    localStorage.hunger = localStorage.hunger - 10;
+    localStorage.thirst = localStorage.thirst - 10;
+  }
+  helpingValueShelter++;
+  $("#storyTitle").text("day " + helpingValueShelter);
+  localStorage.day = helpingValueShelter;
+  //display
+  //
+  //
+  characterInventorySet();
+  characterStatsDisplay();
+});
