@@ -33,12 +33,14 @@
   border: 2px solid black;
   height: 2rem;
   padding-left: 2px;
+  user-select: none;
 }
 .ss {
   border: 2px solid black;
   height: 2rem;
   padding-left: 2px;
   transition: 0.3;
+  user-select: none;
 }
 .bs:hover {
   opacity: 0.6;

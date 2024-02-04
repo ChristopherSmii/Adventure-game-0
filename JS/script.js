@@ -1,4 +1,3 @@
-const empty = "Empty";
 console.log(postWarAloneMaleCharacterBackstories);
 
 console.log(entertainmentItemsWithWeight);
@@ -51,7 +50,7 @@ if (!localStorage.mainCharacterName) {
 
   localStorage.character00 = meleeWeaponsWithWeight[randd(6)][0];
   localStorage.character01 = survivalFoodsWithEnergy[randd(31)][0];
-  localStorage.character02 = survivalFoodsWithEnergy[randd(31)][0];
+  localStorage.character02 = bottles[0];
   localStorage.character03 = survivalItemsWithWeight[randd(13)][0];
   localStorage.character04 = empty;
   localStorage.character05 = empty;
@@ -60,7 +59,7 @@ if (!localStorage.mainCharacterName) {
   localStorage.character08 = empty;
   localStorage.character09 = empty;
   localStorage.character10 = empty;
-  localStorage.character11 = survivalFoodsWithEnergy[30];
+  localStorage.character11 = empty;
 
   //shelter
 
@@ -101,6 +100,7 @@ if (!localStorage.mainCharacterName) {
 }
 let helpingValueShelter = 0;
 $("#shelterInventory").hide();
+$("#upgradeButton").hide();
 // Creating the enviroment
 $("#mainCharacterName").text(
   localStorage.mainCharacterName + " " + localStorage.mainCharacterLastName
@@ -203,7 +203,7 @@ let chance = () => {
   //something found
   if (randd(100) > 50) {
     eventOfTheDay = "In search of items.. " + somethingFoundTexts[randd(3)];
-    looting(1 + randd(4));
+    looting(1 + randd(3));
   } else {
     //nothing found
     eventOfTheDay = "In search of items.. " + nothingFoundTexts[randd(3)];
@@ -224,12 +224,18 @@ let chance = () => {
 function randomItemGive() {
   let item = "T";
 
-  if (randd(100) < 60) {
-    item = survivalFoodsWithEnergy[randd(31)][0];
-  } else if (randd(100) < 60) {
+  if (randd(100) < 50) {
+    item = survivalFoodsWithEnergy[randd(29)][0];
+  } else if (randd(100) < 50) {
     item = survivalItemsWithWeight[randd(13)][0];
-  } else if (randd(100) < 60) {
+  } else if (randd(100) < 50) {
     item = craftingParts[randd(11)][0];
+  } else if (randd(100) < 30) {
+    item = rangedWeaponsWithWeight[randd(6)][0];
+  } else if (randd(100) < 30) {
+    item = meleeWeaponsWithWeight[randd(6)][0];
+  } else if (randd(100) < 30) {
+    item = ammoForRangedWeaponsWithWeight[randd(6)][0];
   } else {
     item = entertainmentItemsWithWeight[randd(7)][0];
   }
@@ -296,14 +302,21 @@ let looting = (rNumb) => {
   }
 };
 //
-let damage = 0;
-let sick;
 //
 //continue button (the main part of the game xD)
+//
+//
+//
+//
+//
+//
+//
+//
 $("#continue").on("click", function () {
   //
   if (helpingValueShelter == 0) {
     $("#shelterInventory").show();
+    $("#upgradeButton").show();
     $("#continue").text("Next Day");
     $("#storyTeller").text(day1Text + restTexts[randd(2)]);
     let storyOfTheDay;
@@ -311,7 +324,7 @@ $("#continue").on("click", function () {
     helpingValueShelter = localStorage.day * 1;
   } else {
     storyOfTheDay = " " + "Day " + (helpingValueShelter + 1) + ": " + chance();
-    localStorage.fullStory = localStorage.fullStory + storyOfTheDay;
+    localStorage.fullStory = localStorage.fullStory + storyOfTheDay + "<br>";
     storyDisplay(storyOfTheDay);
     if (document.querySelector("#characterCondition").innerHTML != empty) {
       for (let i = 0; i < 10; i++) {
@@ -329,8 +342,24 @@ $("#continue").on("click", function () {
     //stats
     //
     //
-    localStorage.hunger = localStorage.hunger - 10;
-    localStorage.thirst = localStorage.thirst - 10;
+    localStorage.hunger = localStorage.hunger - 5;
+    localStorage.thirst = localStorage.thirst - 6;
+    if (
+      1 * localStorage.health < 0 ||
+      1 * localStorage.thirst < 0 ||
+      1 * localStorage.hunger < 0
+    ) {
+      if (1 * localStorage.health < 0) {
+        alert(
+          "You died. Your health wasn't looking too good, take better care of your self next time."
+        );
+      } else if (1 * localStorage.thirst < 0) {
+        alert("You died. Stay hydrated next time.");
+      } else {
+        alert("You died. Remember to eat sometime.");
+      }
+      restartt();
+    }
   }
   helpingValueShelter++;
   $("#storyTitle").text("day " + helpingValueShelter);
@@ -338,6 +367,141 @@ $("#continue").on("click", function () {
   //display
   //
   //
+  //
+  //
+  //
   characterInventorySet();
   characterStatsDisplay();
 });
+
+//
+//Special Select Slot
+$(".bs").on("click", function () {
+  specialSlot = this.innerHTML;
+  if (specialSlot != empty) {
+    $("#useItem").removeClass("semi-visible");
+    $("#moveItem").removeClass("semi-visible");
+    $("#deleteItem").removeClass("semi-visible");
+  } else {
+    $("#useItem").addClass("semi-visible");
+    $("#deleteItem").addClass("semi-visible");
+    $("#moveItem").addClass("semi-visible");
+  }
+});
+//Move button
+//
+//
+//
+//
+//
+//
+//Move button
+$("#moveItem").on("click", function () {
+  let moveOne = false;
+  let removeOne = false;
+  for (let i = 0; i < 24; i++) {
+    for (let j = 0; j < 12; j++) {
+      if (
+        document.querySelectorAll(".bs")[j].innerHTML === specialSlot &&
+        document.querySelectorAll(".ss")[i].innerHTML === empty &&
+        removeOne == false
+      ) {
+        switch (j) {
+          case 0:
+            localStorage.character00 = empty;
+            break;
+          case 1:
+            localStorage.character01 = empty;
+            break;
+          case 2:
+            localStorage.character02 = empty;
+            break;
+          case 3:
+            localStorage.character03 = empty;
+            break;
+          case 4:
+            localStorage.character04 = empty;
+            break;
+          case 5:
+            localStorage.character05 = empty;
+            break;
+          case 6:
+            localStorage.character06 = empty;
+            break;
+          case 7:
+            localStorage.character07 = empty;
+            break;
+          case 8:
+            localStorage.character08 = empty;
+            break;
+          case 9:
+            localStorage.character09 = empty;
+            break;
+          case 10:
+            localStorage.character10 = empty;
+            break;
+          case 11:
+            localStorage.character11 = empty;
+            break;
+          default:
+            break;
+        }
+        removeOne = true;
+        characterInventorySet();
+      }
+    }
+  }
+  for (let i = 0; i < 24; i++) {
+    if (
+      document.querySelectorAll(".ss")[i].innerHTML === empty &&
+      moveOne === false
+    ) {
+      moveOne = true;
+      document.querySelectorAll(".ss")[i].innerHTML = specialSlot;
+    }
+  }
+
+  afterButtons();
+});
+//
+//remove item button
+//
+//
+//
+//
+//
+//
+//
+//
+$("#deleteItem").on("click", function () {
+  let removeOne = false;
+  for (let i = 0; i < 12; i++) {
+    if (
+      document.querySelectorAll(".bs")[i].innerHTML == specialSlot &&
+      removeOne == false
+    ) {
+      document.querySelectorAll(".bs")[i].innerHTML = empty;
+      removeOne = true;
+    }
+  }
+  for (let i = 0; i < 24; i++) {
+    if (
+      document.querySelectorAll(".ss")[i].innerHTML == specialSlot &&
+      removeOne == false
+    ) {
+      removeOne = true;
+      document.querySelectorAll(".ss")[i].innerHTML = empty;
+    }
+    afterButtons();
+  }
+});
+//
+//
+//
+//
+//
+//
+//Use Button
+//
+//
+$("#useItem").on("click", function () {});

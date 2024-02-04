@@ -143,13 +143,12 @@ const survivalFoodsWithEnergy = [
   ["Instant Ramen", 19],
   ["Honey", 16],
   ["Canned Fruit", 14],
-  ["rotten something?", -18],
+  ["Rotten something?", -18],
   ["Dried Fish", 22],
   ["Soylent Green", 30],
-  ["Water bottle", 60],
-  ["Empty bottle", 0],
-  //31
+  //29
 ];
+const bottles = ["Water bottle", "Empty bottle"];
 const meleeWeaponsWithWeight = [
   ["Combat knife", 0.5],
   ["Baseball bat", 1.0],
