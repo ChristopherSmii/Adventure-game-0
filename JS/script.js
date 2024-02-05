@@ -1,8 +1,8 @@
-console.log(postWarAloneMaleCharacterBackstories);
+// console.log(postWarAloneMaleCharacterBackstories);
 
-console.log(entertainmentItemsWithWeight);
+// console.log(entertainmentItemsWithWeight);
 
-console.log(survivalItemsWithWeight);
+// console.log(survivalItemsWithWeight);
 
 let randd = (hNumb) => {
   return Math.floor(Math.random() * hNumb);
@@ -10,13 +10,14 @@ let randd = (hNumb) => {
 // looking if there is a character
 if (!localStorage.mainCharacterName) {
   let temp = randd(10);
+  localStorage.locationOfPlayer = ukCities[temp];
   if (randd(2) == 1) {
     // Male character
     localStorage.mainCharacterName = britishMaleFirstNames[randd(10)];
     localStorage.mainCharacterGender = "Male";
     localStorage.picture =
       '<img src="../PICTURES/m' +
-      Math.floor(1 + randd(2)) +
+      Math.floor(1 + randd(3)) +
       '.png" alt="" class="card-img">';
     localStorage.mainCharacterText =
       localStorage.mainCharacterName +
@@ -31,7 +32,7 @@ if (!localStorage.mainCharacterName) {
     localStorage.mainCharacterGender = "Female";
     localStorage.picture =
       '<img src="../PICTURES/f' +
-      Math.floor(1 + randd(1)) +
+      Math.floor(1 + randd(2)) +
       '.png" alt="" class="card-img">';
     localStorage.mainCharacterText =
       localStorage.mainCharacterName +
@@ -388,6 +389,19 @@ $(".bs").on("click", function () {
     $("#moveItem").addClass("semi-visible");
   }
 });
+//shelter inventory
+$(".ss").on("click", function () {
+  specialSlot = this.innerHTML;
+  if (specialSlot != empty) {
+    $("#useItem").removeClass("semi-visible");
+    $("#moveItem").removeClass("semi-visible");
+    $("#deleteItem").removeClass("semi-visible");
+  } else {
+    $("#useItem").addClass("semi-visible");
+    $("#deleteItem").addClass("semi-visible");
+    $("#moveItem").addClass("semi-visible");
+  }
+});
 //Move button
 //
 //
@@ -454,7 +468,8 @@ $("#moveItem").on("click", function () {
   for (let i = 0; i < 24; i++) {
     if (
       document.querySelectorAll(".ss")[i].innerHTML === empty &&
-      moveOne === false
+      moveOne === false &&
+      removeOne == true
     ) {
       moveOne = true;
       document.querySelectorAll(".ss")[i].innerHTML = specialSlot;
@@ -474,26 +489,8 @@ $("#moveItem").on("click", function () {
 //
 //
 $("#deleteItem").on("click", function () {
-  let removeOne = false;
-  for (let i = 0; i < 12; i++) {
-    if (
-      document.querySelectorAll(".bs")[i].innerHTML == specialSlot &&
-      removeOne == false
-    ) {
-      document.querySelectorAll(".bs")[i].innerHTML = empty;
-      removeOne = true;
-    }
-  }
-  for (let i = 0; i < 24; i++) {
-    if (
-      document.querySelectorAll(".ss")[i].innerHTML == specialSlot &&
-      removeOne == false
-    ) {
-      removeOne = true;
-      document.querySelectorAll(".ss")[i].innerHTML = empty;
-    }
-    afterButtons();
-  }
+  removeItemFunction();
+  afterButtons();
 });
 //
 //
@@ -504,4 +501,33 @@ $("#deleteItem").on("click", function () {
 //Use Button
 //
 //
-$("#useItem").on("click", function () {});
+$("#useItem").on("click", function () {
+  foodUseFunction();
+  characterStatsDisplay();
+  afterButtons();
+});
+let foodUseFunction = () => {
+  let useOne = false;
+  let itemType = "something";
+  //Some items should not be deleted
+  //eating food
+  for (let i = 0; i < 29; i++) {
+    if (survivalFoodsWithEnergy[i][0].includes(specialSlot) && !useOne) {
+      $("#storyTeller").text(eatingTexts[randd(2)]);
+      localStorage.hunger =
+        1 * localStorage.hunger + survivalFoodsWithEnergy[i][1];
+      if (1 * localStorage.hunger > 100) {
+        localStorage.hunger = 100;
+      }
+      itemType = "food";
+    } else if (specialSlot == "Water bottle") {
+      itemType = "food";
+      localStorage.thirst = 100;
+      $("#storyTeller").text(drinkingTexts[randd(2)]);
+    }
+  }
+  //Deleting item that was used
+  if (itemType == "food") {
+    removeItemFunction();
+  }
+};

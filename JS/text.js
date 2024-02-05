@@ -84,8 +84,8 @@ const survivalItemsWithWeight = [
   ["Flashlight", 0.5],
   ["battery", 1.0],
   ["Firestarter", 0.1],
-  ["Map and compass", 0.2],
-  ["Personal hygiene items", 0.3],
+  ["Map and compass", "your location is " + localStorage.locationOfPlayer],
+  ["hygiene items", 0.3],
   ["Emergency whistle", 0.05],
   ["Medications", 0.2],
   ["purification tablets", 0.1],
@@ -167,11 +167,11 @@ const rangedWeaponsWithWeight = [
 ];
 const ammoForRangedWeaponsWithWeight = [
   ["9mm ammunition", 0.02],
-  ["12-gauge shotgun shells", 0.05],
-  ["5.56mm rifle cartridges", 0.03],
-  ["Bolts for crossbow", 0.02],
-  [".308 rifle bullets", 0.04],
-  [".45 ACP ammunition", 0.02],
+  ["shotgun shells", 0.05],
+  ["rifle cartridges", 0.03],
+  ["crossbow Bolts", 0.02],
+  ["Sniper bullets", 0.04],
+  ["9mm HE ammo", 0.02],
 ];
 const postWarAloneMaleCharacterBackstories = [
   ", once a military operative, roams the desolate landscapes alone, haunted by memories of the war, seeking solace in isolation.",
@@ -218,4 +218,24 @@ const sicknessTraitsWithDanger = [
   { sickness: "Heat Stroke", danger: 4 },
   { sickness: "Hypothermia", danger: 4 },
   { sickness: "Parasitic Infection", danger: 5 },
+];
+const drinkingTexts = [
+  "You take a sip, refreshing your parched throat.",
+  "Quenching your thirst, you empty your water bottle.",
+];
+const eatingTexts = [
+  "Savoring a meal, you replenish your energy.",
+  "With each bite, you feel a surge of vitality.",
+];
+const ukCities = [
+  "London",
+  "Manchester",
+  "Birmingham",
+  "Glasgow",
+  "Liverpool",
+  "Edinburgh",
+  "Bristol",
+  "Leeds",
+  "Newcastle",
+  "Cardiff",
 ];

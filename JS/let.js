@@ -46,3 +46,32 @@ const afterButtons = () => {
   $("#deleteItem").addClass("semi-visible");
   $("#moveItem").addClass("semi-visible");
 };
+let removeItemFunction = () => {
+  let removeOne = false;
+  for (let i = 0; i < 12; i++) {
+    if (
+      document.querySelectorAll(".bs")[i].innerHTML == specialSlot &&
+      removeOne == false
+    ) {
+      if (specialSlot != "Water bottle") {
+        document.querySelectorAll(".bs")[i].innerHTML = empty;
+        removeOne = true;
+      } else {
+        document.querySelectorAll(".bs")[i].innerHTML = "Empty bottle";
+      }
+    }
+  }
+  for (let i = 0; i < 24; i++) {
+    if (
+      document.querySelectorAll(".ss")[i].innerHTML == specialSlot &&
+      removeOne == false
+    ) {
+      if (specialSlot != "Water bottle") {
+        removeOne = true;
+        document.querySelectorAll(".ss")[i].innerHTML = empty;
+      } else {
+        document.querySelectorAll(".ss")[i].innerHTML = "Empty bottle";
+      }
+    }
+  }
+};
