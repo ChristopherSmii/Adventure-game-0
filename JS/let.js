@@ -75,3 +75,5 @@ let removeItemFunction = () => {
     }
   }
 };
+$("#playAgain").hide();
+$("#fullStoryDisplay").hide();

@@ -237,6 +237,10 @@ function randomItemGive() {
     item = meleeWeaponsWithWeight[randd(6)][0];
   } else if (randd(100) < 30) {
     item = ammoForRangedWeaponsWithWeight[randd(6)][0];
+  } else if (randd(100) < 30) {
+    item = cannedDrinks[randd(4)][0];
+  } else if (randd(100) < 5) {
+    item = bottles[randd(4)][0];
   } else {
     item = entertainmentItemsWithWeight[randd(7)][0];
   }
@@ -321,7 +325,7 @@ $("#continue").on("click", function () {
     $("#continue").text("Next Day");
     $("#storyTeller").text(day1Text + restTexts[randd(2)]);
     let storyOfTheDay;
-    localStorage.fullStory = day1Text + restTexts[randd(2)];
+    localStorage.fullStory = day1Text + restTexts[randd(2)] + "<br><br>";
     helpingValueShelter = localStorage.day * 1;
   } else {
     storyOfTheDay = " " + "Day " + (helpingValueShelter + 1) + ": " + chance();
@@ -359,7 +363,7 @@ $("#continue").on("click", function () {
       } else {
         alert("You died. Remember to eat sometime.");
       }
-      restartt();
+      storyDeathDisplay();
     }
   }
   helpingValueShelter++;
@@ -516,9 +520,9 @@ let foodUseFunction = () => {
       $("#storyTeller").text(eatingTexts[randd(2)]);
       localStorage.hunger =
         1 * localStorage.hunger + survivalFoodsWithEnergy[i][1];
-      if (1 * localStorage.hunger > 100) {
-        localStorage.hunger = 100;
-      }
+      localStorage.thirst =
+        1 * localStorage.thirst + survivalFoodsWithEnergy[i][2];
+
       itemType = "food";
     } else if (specialSlot == "Water bottle") {
       itemType = "food";
@@ -526,8 +530,43 @@ let foodUseFunction = () => {
       $("#storyTeller").text(drinkingTexts[randd(2)]);
     }
   }
+  //canned drinks
+  for (let i = 0; i < 4; i++) {
+    if (cannedDrinks[i][0].includes(specialSlot) && !useOne) {
+      $("#storyTeller").text(drinkingCannedTexts[randd(4)]);
+      itemType = "food";
+      localStorage.hunger = 1 * localStorage.hunger + cannedDrinks[i][1];
+      localStorage.thirst = 1 * localStorage.thirst + cannedDrinks[i][2];
+    }
+  }
+  //max value
+  if (1 * localStorage.hunger > 100) {
+    localStorage.hunger = 100;
+  }
+  if (1 * localStorage.thirst > 100) {
+    localStorage.thirst = 100;
+  }
   //Deleting item that was used
   if (itemType == "food") {
     removeItemFunction();
   }
 };
+//
+//
+//
+//
+//
+//storyAfterDeath
+function storyDeathDisplay() {
+  $("#playAgain").show();
+  $("#fullStoryDisplay").show();
+  $("#mainGameDisplay").hide();
+  document.querySelector("#fullStoryDisplay").innerHTML =
+    localStorage.fullStory;
+}
+//
+//
+//
+$("#playAgain").on("click", function () {
+  restartt();
+});
