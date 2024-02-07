@@ -32,7 +32,7 @@ if (!localStorage.mainCharacterName) {
     localStorage.mainCharacterGender = "Female";
     localStorage.picture =
       '<img src="../PICTURES/f' +
-      Math.floor(1 + randd(2)) +
+      Math.floor(1 + randd(3)) +
       '.png" alt="" class="card-img">';
     localStorage.mainCharacterText =
       localStorage.mainCharacterName +
@@ -49,7 +49,7 @@ if (!localStorage.mainCharacterName) {
   localStorage.likes = "playing " + entertainmentItemsWithWeight[randd(7)][0];
   //   Character and shelter inventory
 
-  localStorage.character00 = meleeWeaponsWithWeight[randd(6)][0];
+  localStorage.character00 = cannedDrinks[randd(4)][0];
   localStorage.character01 = survivalFoodsWithEnergy[randd(31)][0];
   localStorage.character02 = bottles[0];
   localStorage.character03 = survivalItemsWithWeight[randd(13)][0];
@@ -171,7 +171,7 @@ characterStatsDisplay();
 //
 //
 let storyDisplay = (storyString) => {
-  $("#storyTeller").text(storyString);
+  document.querySelector("#storyTeller").innerHTML = storyString;
 };
 storyDisplay(localStorage.mainCharacterAfterWar);
 //
@@ -231,13 +231,7 @@ function randomItemGive() {
     item = survivalItemsWithWeight[randd(13)][0];
   } else if (randd(100) < 50) {
     item = craftingParts[randd(11)][0];
-  } else if (randd(100) < 30) {
-    item = rangedWeaponsWithWeight[randd(6)][0];
-  } else if (randd(100) < 30) {
-    item = meleeWeaponsWithWeight[randd(6)][0];
-  } else if (randd(100) < 30) {
-    item = ammoForRangedWeaponsWithWeight[randd(6)][0];
-  } else if (randd(100) < 30) {
+  } else if (randd(100) < 25) {
     item = cannedDrinks[randd(4)][0];
   } else if (randd(100) < 5) {
     item = bottles[randd(4)][0];
@@ -329,7 +323,11 @@ $("#continue").on("click", function () {
     helpingValueShelter = localStorage.day * 1;
   } else {
     storyOfTheDay = " " + "Day " + (helpingValueShelter + 1) + ": " + chance();
-    localStorage.fullStory = localStorage.fullStory + storyOfTheDay + "<br>";
+    if (randd(10) < 2) {
+      nightEvent();
+    }
+    localStorage.fullStory =
+      localStorage.fullStory + storyOfTheDay + "<br><br>";
     storyDisplay(storyOfTheDay);
     if (document.querySelector("#characterCondition").innerHTML != empty) {
       for (let i = 0; i < 10; i++) {
@@ -355,15 +353,15 @@ $("#continue").on("click", function () {
       1 * localStorage.hunger < 0
     ) {
       if (1 * localStorage.health < 0) {
-        alert(
-          "You died. Your health wasn't looking too good, take better care of your self next time."
-        );
+        died = "The character didn't mind lossing a little too much blood.";
       } else if (1 * localStorage.thirst < 0) {
-        alert("You died. Stay hydrated next time.");
+        died =
+          "The character forgot to consider drinking water in order to survive.";
       } else {
-        alert("You died. Remember to eat sometime.");
+        died = "The character's stomach and back came to contact.";
       }
       storyDeathDisplay();
+      alert(died);
     }
   }
   helpingValueShelter++;
@@ -507,6 +505,7 @@ $("#deleteItem").on("click", function () {
 //
 $("#useItem").on("click", function () {
   foodUseFunction();
+  survivalItemsWithWeightUse();
   characterStatsDisplay();
   afterButtons();
 });
@@ -539,6 +538,20 @@ let foodUseFunction = () => {
       localStorage.thirst = 1 * localStorage.thirst + cannedDrinks[i][2];
     }
   }
+  for (let i = 0; i < 7; i++) {
+    if (entertainmentItemsWithWeight[i][0].includes(specialSlot) && !useOne) {
+      $("#storyTeller").text("You Enjoyed Yourself");
+      itemType = "food";
+      if (specialSlot == localStorage.likes) {
+        moodChange("-");
+      } else if (randd(10) > 7) {
+        moodChange("-");
+      }
+    }
+  }
+  if (specialSlot == "Map and compass") {
+    locationFind();
+  }
   //max value
   if (1 * localStorage.hunger > 100) {
     localStorage.hunger = 100;
@@ -552,6 +565,20 @@ let foodUseFunction = () => {
   }
 };
 //
+//survivalItemsWithWeightUse
+//
+//
+
+function survivalItemsWithWeightUse() {
+  if (specialSlot == "First aid kit") {
+    document.querySelector("#characterCondition").innerHTML = empty;
+    localStorage.health = 1 * localStorage.health + 5;
+    if (1 * localStorage.health > 100) {
+      localStorage.health = 100;
+    }
+  }
+}
+//
 //
 //
 //
@@ -561,6 +588,15 @@ function storyDeathDisplay() {
   $("#playAgain").show();
   $("#fullStoryDisplay").show();
   $("#mainGameDisplay").hide();
+  localStorage.fullStory =
+    localStorage.fullStory +
+    "<br><br><br>" +
+    localStorage.mainCharacterName +
+    " died. " +
+    died +
+    "<br><br>" +
+    "score: " +
+    scoreOfRun();
   document.querySelector("#fullStoryDisplay").innerHTML =
     localStorage.fullStory;
 }
@@ -570,3 +606,50 @@ function storyDeathDisplay() {
 $("#playAgain").on("click", function () {
   restartt();
 });
+
+let scoreOfRun = () => {
+  let moodValue;
+  let i = 1;
+  if (localStorage.mood == "Normal") {
+    moodValue = 1;
+  } else if (localStorage.mood == "Sad") {
+    moodValue = 0.8;
+  } else if (localStorage.mood == "Happy") {
+    moodValue = 1.4;
+  } else if (localStorage.mood == "Depressed") {
+    moodValue = 0.4;
+  }
+  i = i * localStorage.day;
+  i = 10 * (1 * i * moodValue) * locationPoint;
+  return i;
+};
+let nightEvent = () => {
+  if (randd(10) < 4) {
+    storyOfTheDay = storyOfTheDay + "<br>" + nightmares[randd(4)];
+    moodChange("+");
+  } else if (randd(10) > 4) {
+    storyOfTheDay = storyOfTheDay + "<br>" + happyDreams[randd(4)];
+    moodChange("-");
+  } else {
+    storyOfTheDay =
+      storyOfTheDay +
+      "<br>" +
+      "You woke up during the night, Nothing seems to be out of order.";
+  }
+};
+//mood change function
+function moodChange(string) {
+  if (string == "+" && localStorage.mood != "Depressed") {
+    localStorage.mood =
+      possibleMoods[1 + possibleMoods.indexOf(localStorage.mood)];
+  } else if (string == "-" && localStorage.mood != "Happy") {
+    localStorage.mood =
+      possibleMoods[possibleMoods.indexOf(localStorage.mood) - 1];
+  }
+  $("#mood").text("mood: " + localStorage.mood);
+}
+//location
+function locationFind() {
+  alert("You Found out your location: " + localStorage.locationOfPlayer);
+  locationPoint = 2;
+}

@@ -2,7 +2,8 @@ let specialSlot = "solid";
 let damage = 0;
 let sick;
 const empty = "Empty";
-
+let died;
+locationPoint = 1;
 const afterButtons = () => {
   localStorage.character00 = document.querySelector("#cs0").innerHTML;
   localStorage.character01 = document.querySelector("#cs1").innerHTML;

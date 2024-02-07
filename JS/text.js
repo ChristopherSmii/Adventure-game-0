@@ -84,7 +84,7 @@ const survivalItemsWithWeight = [
   ["Flashlight", 0.5],
   ["battery", 1.0],
   ["Firestarter", 0.1],
-  ["Map and compass", "your location is " + localStorage.locationOfPlayer],
+  ["Map and compass", 0],
   ["hygiene items", 0.3],
   ["Emergency whistle", 0.05],
   ["Medications", 0.2],
@@ -250,4 +250,32 @@ const ukCities = [
   "Leeds",
   "Newcastle",
   "Cardiff",
+];
+//dreams
+//
+//
+const goodNightEvents = [
+  "The stars twinkle brightly overhead, casting a peaceful glow.",
+  "A gentle breeze rustles through the trees, creating a soothing lullaby.",
+  "The moonlight bathes the landscape in a serene, silver glow.",
+  "You find a comfortable spot to rest, feeling safe and secure.",
+  "The sound of crickets fills the air, lulling you into a peaceful slumber.",
+  "You gaze up at the night sky, feeling a sense of wonder and tranquility.",
+];
+const nightEvents = [
+  "A distant howl pierces the night, sending shivers down your spine.",
+  "You hear mysterious whispers in the darkness, their origin unknown.",
+  "The sound of footsteps echo ominously nearby, but you see no one.",
+];
+const nightmares = [
+  "You find yourself lost in a maze of darkness, unable to escape.",
+  "A shadowy figure chases you relentlessly through an endless void.",
+  "You're trapped in a room filled with mirrors, each reflecting distorted images of yourself.",
+  "You're falling endlessly into a bottomless abyss, consumed by a sense of dread.",
+];
+const happyDreams = [
+  "You find yourself flying through the clouds, feeling exhilarated and free.",
+  "You're surrounded by loved ones, sharing laughter and joy in a beautiful garden.",
+  "You're on a grand adventure, exploring magical lands and discovering hidden treasures.",
+  "You achieve your wildest dreams, feeling a sense of fulfillment and contentment.",
 ];
