@@ -80,17 +80,9 @@ const startMaleCharacterBackstories = [
 const possibleMoods = ["Happy", "Normal", "Sad", "Depressed"];
 const survivalItemsWithWeight = [
   ["First aid kit", 0.8],
-  ["Multi-tool", 0.3],
-  ["Flashlight", 0.5],
-  ["battery", 1.0],
-  ["Firestarter", 0.1],
   ["Map and compass", 0],
   ["hygiene items", 0.3],
-  ["Emergency whistle", 0.05],
   ["Medications", 0.2],
-  ["purification tablets", 0.1],
-  ["Sleeping bag", 1.2],
-  ["Signal mirror", 0.1],
   ["Multi-vitamins", 0.1],
 ];
 const craftingParts = [

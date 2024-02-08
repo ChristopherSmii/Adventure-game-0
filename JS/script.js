@@ -52,7 +52,7 @@ if (!localStorage.mainCharacterName) {
   localStorage.character00 = cannedDrinks[randd(4)][0];
   localStorage.character01 = survivalFoodsWithEnergy[randd(31)][0];
   localStorage.character02 = bottles[0];
-  localStorage.character03 = survivalItemsWithWeight[randd(13)][0];
+  localStorage.character03 = empty;
   localStorage.character04 = empty;
   localStorage.character05 = empty;
   localStorage.character06 = empty;
@@ -204,7 +204,7 @@ let chance = () => {
   //something found
   if (randd(100) > 50) {
     eventOfTheDay = "In search of items.. " + somethingFoundTexts[randd(3)];
-    looting(1 + randd(3));
+    looting(1 + randd(2));
   } else {
     //nothing found
     eventOfTheDay = "In search of items.. " + nothingFoundTexts[randd(3)];
@@ -227,14 +227,12 @@ function randomItemGive() {
 
   if (randd(100) < 50) {
     item = survivalFoodsWithEnergy[randd(29)][0];
-  } else if (randd(100) < 50) {
-    item = survivalItemsWithWeight[randd(13)][0];
-  } else if (randd(100) < 50) {
-    item = craftingParts[randd(11)][0];
+  } else if (randd(100) < 15) {
+    item = survivalItemsWithWeight[randd(5)][0];
   } else if (randd(100) < 25) {
     item = cannedDrinks[randd(4)][0];
-  } else if (randd(100) < 5) {
-    item = bottles[randd(4)][0];
+  } else if (randd(100) < 2) {
+    item = bottles[randd(2)];
   } else {
     item = entertainmentItemsWithWeight[randd(7)][0];
   }
@@ -315,7 +313,7 @@ $("#continue").on("click", function () {
   //
   if (helpingValueShelter == 0) {
     $("#shelterInventory").show();
-    $("#upgradeButton").show();
+    // $("#upgradeButton").show();
     $("#continue").text("Next Day");
     $("#storyTeller").text(day1Text + restTexts[randd(2)]);
     let storyOfTheDay;
@@ -539,10 +537,10 @@ let foodUseFunction = () => {
     }
   }
   for (let i = 0; i < 7; i++) {
-    if (entertainmentItemsWithWeight[i][0].includes(specialSlot) && !useOne) {
+    if (entertainmentItemsWithWeight[i][0] === specialSlot && !useOne) {
       $("#storyTeller").text("You Enjoyed Yourself");
       itemType = "food";
-      if (specialSlot == localStorage.likes) {
+      if (specialSlot === "playing " + localStorage.likes) {
         moodChange("-");
       } else if (randd(10) > 7) {
         moodChange("-");
@@ -570,15 +568,23 @@ let foodUseFunction = () => {
 //
 
 function survivalItemsWithWeightUse() {
-  if (specialSlot == "First aid kit") {
+  if (
+    specialSlot == "First aid kit" ||
+    specialSlot == "Medications" ||
+    specialSlot == "Multi-vitamins"
+  ) {
     document.querySelector("#characterCondition").innerHTML = empty;
     localStorage.health = 1 * localStorage.health + 5;
     if (1 * localStorage.health > 100) {
       localStorage.health = 100;
     }
+  } else if (specialSlot == "hygiene items") {
+    moodChange("-");
+    alert("You got a reminder of the times before the war.");
   }
+  removeItemFunction();
 }
-//
+//ce
 //
 //
 //
@@ -611,13 +617,13 @@ let scoreOfRun = () => {
   let moodValue;
   let i = 1;
   if (localStorage.mood == "Normal") {
-    moodValue = 1;
+    moodValue = 1 * 10;
   } else if (localStorage.mood == "Sad") {
-    moodValue = 0.8;
+    moodValue = 0.8 * 10;
   } else if (localStorage.mood == "Happy") {
-    moodValue = 1.4;
+    moodValue = 1.4 * 10;
   } else if (localStorage.mood == "Depressed") {
-    moodValue = 0.4;
+    moodValue = 0.4 * 10;
   }
   i = i * localStorage.day;
   i = 10 * (1 * i * moodValue) * locationPoint;
@@ -625,10 +631,10 @@ let scoreOfRun = () => {
 };
 let nightEvent = () => {
   if (randd(10) < 4) {
-    storyOfTheDay = storyOfTheDay + "<br>" + nightmares[randd(4)];
+    storyOfTheDay = storyOfTheDay + "<br>Dream: " + nightmares[randd(4)];
     moodChange("+");
   } else if (randd(10) > 4) {
-    storyOfTheDay = storyOfTheDay + "<br>" + happyDreams[randd(4)];
+    storyOfTheDay = storyOfTheDay + "<br>Dream: " + happyDreams[randd(4)];
     moodChange("-");
   } else {
     storyOfTheDay =
